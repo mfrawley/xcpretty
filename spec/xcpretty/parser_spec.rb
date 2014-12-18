@@ -23,9 +23,31 @@ module XCPretty
       @parser.parse(SAMPLE_ANALYZE_SHALLOW)
     end
 
+    it 'parses build failed message' do
+      @formatter.should receive(:format_stage_complete).with('BUILD','FAILED')
+      @parser.parse('** BUILD FAILED **')
+    end
+
+    it 'parses build succeeded message' do
+      @formatter.should receive(:format_stage_complete).with('BUILD',
+        'SUCCEEDED')
+      @parser.parse('** BUILD SUCCEEDED **')
+    end
+
     it "parses build target" do
       @formatter.should receive(:format_build_target).with("The Spacer", "Pods", "Debug")
       @parser.parse(SAMPLE_BUILD)
+    end
+
+    it 'parses clean failed message' do
+      @formatter.should receive(:format_stage_complete).with('CLEAN','FAILED')
+      @parser.parse('** CLEAN FAILED **')
+    end
+
+    it 'parses clean succeeded message' do
+      @formatter.should receive(:format_stage_complete).with('CLEAN',
+        'SUCCEEDED')
+      @parser.parse('** CLEAN SUCCEEDED **')
     end
 
     it "parses clean remove" do
@@ -216,6 +238,16 @@ module XCPretty
     it 'does not filter an indented path not in a bin dir' do
       @formatter.should_not receive(:format_shell_command)
       @parser.parse('    /some/path/to/a/file -flags arg1 arg2')
+    end
+
+    it 'parses test failed message' do
+      @formatter.should receive(:format_stage_complete).with('TEST','FAILED')
+      @parser.parse('** TEST FAILED **')
+    end
+
+    it 'parses test succeeded message' do
+      @formatter.should receive(:format_stage_complete).with('TEST','SUCCEEDED')
+      @parser.parse('** TEST SUCCEEDED **')
     end
 
     it "parses Touch" do

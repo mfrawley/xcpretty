@@ -130,6 +130,10 @@ module XCPretty
     PROCESS_INFO_PLIST_MATCHER = /^ProcessInfoPlistFile\s.*\.plist\s(.*\/+(.*\.plist))/
 
     # @regex Captured groups
+    # $1 stage
+    # $2 status
+    STAGE_COMPLETE_MATCHER = /\*\* (BUILD|CLEAN|TEST) (SUCCEEDED|FAILED) \*\*/
+
     # $1 = suite
     # $2 = time
     TESTS_RUN_COMPLETION_MATCHER = /^\s*Test Suite '(?:.*\/)?(.*[ox]ctest.*)' (finished|passed|failed) at (.*)/
@@ -293,6 +297,8 @@ module XCPretty
         formatter.format_preprocess($1)
       when PBXCP_MATCHER
         formatter.format_pbxcp($1)
+      when STAGE_COMPLETE_MATCHER
+        formatter.format_stage_complete($1, $2)
       when TESTS_RUN_COMPLETION_MATCHER
         formatter.format_test_run_finished($1, $3)
       when TESTS_RUN_START_MATCHER
