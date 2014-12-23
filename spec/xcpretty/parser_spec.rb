@@ -24,12 +24,13 @@ module XCPretty
     end
 
     it 'parses build failed message' do
-      @formatter.should receive(:format_stage_complete).with('BUILD','FAILED')
+      @formatter.should receive(:format_stage_complete).with('BUILD', 'FAILED')
       @parser.parse('** BUILD FAILED **')
     end
 
     it 'parses build succeeded message' do
-      @formatter.should receive(:format_stage_complete).with('BUILD',
+      @formatter.should receive(:format_stage_complete).with(
+        'BUILD',
         'SUCCEEDED')
       @parser.parse('** BUILD SUCCEEDED **')
     end
@@ -40,13 +41,13 @@ module XCPretty
     end
 
     it 'parses clean failed message' do
-      @formatter.should receive(:format_stage_complete).with('CLEAN','FAILED')
+      @formatter.should receive(:format_stage_complete).with('CLEAN', 'FAILED')
       @parser.parse('** CLEAN FAILED **')
     end
 
     it 'parses clean succeeded message' do
-      @formatter.should receive(:format_stage_complete).with('CLEAN',
-        'SUCCEEDED')
+      @formatter.should receive(:format_stage_complete).with(
+        'CLEAN', 'SUCCEEDED')
       @parser.parse('** CLEAN SUCCEEDED **')
     end
 
@@ -130,9 +131,9 @@ module XCPretty
       @parser.parse(SAMPLE_COPYSTRINGS)
     end
 
-    it "parses CpHeader" do
+    it 'parses CpHeader' do
       @formatter.should receive(:format_copy_header_file).with(
-        '/path/to/Header.h','/some other/path/Header.h')
+        '/path/to/Header.h', '/some other/path/Header.h')
       @parser.parse('CpHeader /path/to/Header.h /some other/path/Header.h')
     end
 
@@ -224,7 +225,8 @@ module XCPretty
     end
 
     it 'parses changing directories' do
-      @formatter.should receive(:format_shell_command).with('cd',
+      @formatter.should receive(:format_shell_command).with(
+        'cd',
         '/some/place/out\ there')
       @parser.parse('    cd /some/place/out\ there')
     end
@@ -241,12 +243,13 @@ module XCPretty
     end
 
     it 'parses test failed message' do
-      @formatter.should receive(:format_stage_complete).with('TEST','FAILED')
+      @formatter.should receive(:format_stage_complete).with('TEST', 'FAILED')
       @parser.parse('** TEST FAILED **')
     end
 
     it 'parses test succeeded message' do
-      @formatter.should receive(:format_stage_complete).with('TEST','SUCCEEDED')
+      @formatter.should receive(:format_stage_complete).with(
+        'TEST', 'SUCCEEDED')
       @parser.parse('** TEST SUCCEEDED **')
     end
 

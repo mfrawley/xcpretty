@@ -37,12 +37,12 @@ module XCPretty
       format("Compiling", file_name)
     end
 
-    def format_copy_header_file(source, target)
-      format("Copying", File.basename(source))
+    def format_copy_header_file(source, _)
+      format('Copying', File.basename(source))
     end
 
-    def format_copy_plist_file(source, target)
-      format("Copying", File.basename(source))
+    def format_copy_plist_file(source, _)
+      format('Copying', File.basename(source))
     end
 
     def format_copy_strings_file(file)

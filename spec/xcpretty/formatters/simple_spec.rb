@@ -41,12 +41,14 @@ module XCPretty
       end
 
       it 'formats copying header files' do
-        @formatter.format_copy_header_file('Source.h',
+        @formatter.format_copy_header_file(
+          'Source.h',
           'dir/Destination.h').should == '> Copying Source.h'
       end
 
       it 'formats copying plist files' do
-        @formatter.format_copy_plist_file("Source.plist",
+        @formatter.format_copy_plist_file(
+          'Source.plist',
           'dir/Destination.plist').should == '> Copying Source.plist'
       end
 
