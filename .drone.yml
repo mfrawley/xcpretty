@@ -1,7 +1,6 @@
 image: ruby2.0.0
-install:
-  - bundle install
 script:
+  - bundle install
   - cucumber
   - rspec
 
