@@ -1,6 +1,6 @@
-image: ruby2.0.0
+image: ruby2.1.4
 script:
   - bundle install
-  - cucumber
-  - rspec
+  - bundle exec cucumber
+  - bundle exec rspec
 
