@@ -19,10 +19,21 @@ report_formats = {
 }
 
 printer_opts = {
-  :unicode => true,
-  :colorize => false,
+  :unicode => XCPretty::Term.unicode?,
+  :colorize => XCPretty::Term.color?,
   :formatter => XCPretty::Simple
 }
+
+def opt_bool(field, value)
+  case value
+  when "on"
+    true
+  when "off"
+    false
+  else
+    XCPretty.exit_with_error("Expected #{field} value to be 'on' or 'off'")
+  end
+end
 
 OptionParser.new do |opts|
   opts.banner = "Usage: xcodebuild [options] | xcpretty"
@@ -41,11 +52,11 @@ OptionParser.new do |opts|
   opts.on('-f', '--formatter PATH', 'Use formatter returned from evaluating the specified Ruby file') do |path|
     printer_opts[:formatter] = XCPretty.load_custom_formatter(path)
   end
-  opts.on('-c', '--color', 'Use colorized output') do
-    printer_opts[:colorize] = true
+  opts.on('--color ENABLED', 'Use colorized output. Valid values are "on" and "off". Defaults is auto') do |value|
+    printer_opts[:colorize] = opt_bool('color', value)
   end
-  opts.on('--no-utf', 'Disable unicode characters in output') do
-    printer_opts[:unicode] = false
+  opts.on('--utf ENABLED', 'Use unicode characters in output. Valid values are "on" and "off". Default is auto.') do |value|
+    printer_opts[:unicode] = opt_bool('unicode', value)
   end
   opts.on("-r", "--report FORMAT", "Run FORMAT reporter",
                 "  Choices: #{report_formats.keys.join(', ')}") do |format|

@@ -32,8 +32,9 @@ $ xcodebuild [flags] | xcpretty -c && exit ${PIPESTATUS[0]}
 
 ## Formats
 
-- `--color`, `-c` (you can add it to `--simple` or `--test` format)
-- `--no-utf` (use only ASCII characters in output)
+- `--color=[on,off]`: Show build icons in color. (you can add it to `--simple` or `--test` format).
+  Defaults to auto-detecting color availability.
+- `--utf=[on,off]`: Use unicode characters in build output or only ASCII
 
 - `--simple`, `-s` (default)
 ![xcpretty --simple](http://i.imgur.com/LdmozBS.gif)
