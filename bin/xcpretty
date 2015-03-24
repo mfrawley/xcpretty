@@ -24,7 +24,7 @@ printer_opts = {
   :formatter => XCPretty::Simple
 }
 
-def opt_bool(field, value)
+def bool_option(field, value)
   case value
   when "on"
     true
@@ -53,10 +53,10 @@ OptionParser.new do |opts|
     printer_opts[:formatter] = XCPretty.load_custom_formatter(path)
   end
   opts.on('--color ENABLED', 'Use colorized output. Valid values are "on" and "off". Defaults is auto') do |value|
-    printer_opts[:colorize] = opt_bool('color', value)
+    printer_opts[:colorize] = bool_option('color', value)
   end
   opts.on('--utf ENABLED', 'Use unicode characters in output. Valid values are "on" and "off". Default is auto.') do |value|
-    printer_opts[:unicode] = opt_bool('unicode', value)
+    printer_opts[:unicode] = bool_option('unicode', value)
   end
   opts.on("-r", "--report FORMAT", "Run FORMAT reporter",
                 "  Choices: #{report_formats.keys.join(', ')}") do |format|
